@@ -1,30 +1,52 @@
 public class Main {
     public static void main(String[] args) {
-        //Initialize array
-        String[] names = new String[]{"Billy", "Andrew", "Jacob", "Zoey", "Sandra", "Jimmy", "Walt", "Barbra", "Gustavo", "Louis"};
-        //Array fr will store frequencies of element
-        int maxValue = 250;
-        int[] fr = new int[names.length];
-        int visited = -1;
-            for (int i = 0; i < names.length; i++) {
-                int count = 1;
-                int rand = (int) (Math.random() * names.length);
-                String random_name = names[rand];
-                for (int j = i + 1; j < names.length; j++) {
-                    if (random_name == names[j]) {
-                        count++;
-                        //To avoid counting same element again
-                        fr[j] = visited;
-                    }
-                }
-                if (fr[i] != visited)
-                    fr[i] = count;
+        // Assign 10 student names to an array:
+        String[] names = new String[]{
+            "Billy", "Andrew", "Jacob", "Zoey", "Sandra",
+            "Jimmy", "Walt", "Barbra", "Gustavo", "Louis"
+        };
+
+        // Create a bucket to hold the number of asterisks at each node in the names array.
+        int[] asterisk_count = new int[]{
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0
+        };
+
+        // Create a loop that runs 250 times.
+        // Each iteration selects a random name from the array.
+
+        for (int i = 0; i < 250; i++) {
+            asterisk_count[(int) (Math.random() * 10)]++;
+        }
+
+        for (int i = 0; i < names.length; i++) {
+            // build an asterisks line
+            String asterisks = "";
+            for (int j = 0; j < asterisk_count[i]; j++) {
+                asterisks += "*";
             }
 
-            //Displays the frequency of each element present in array
-        for (int i = 0; i < fr.length; i++) {
-                if (fr[i] != visited)
-                    System.out.println(names[i] + ": " + fr[i]);
+            // print the output
+            System.out.print(i + 1);
+            System.out.println(": " + asterisks + " " + names[i]);
+        }
+
+        // is there a tie? Look at the asterisk_count array and see if any of the topmost array
+        // node values are equal (or, more than 1), and break the tie.
+
+        // Find the maximum value in asterisk_count
+        int biggest = 0;
+        for (int i = 0; i < asterisk_count.length; i++) {
+            if (asterisk_count[i] > biggest) {
+                biggest = asterisk_count[i];
             }
         }
+
+        // Create an array to hold the index values of the max values in asterisk_count
+        int[] max_index_values = new int[0];
+        for (int i = 0; i < asterisk_count.length; i++) {
+            max_index_values[i] = asterisk_count[i];
+        }
+
+    }
 }
