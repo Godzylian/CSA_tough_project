@@ -42,11 +42,43 @@ public class Main {
             }
         }
 
-        // Create an array to hold the index values of the max values in asterisk_count
-        int[] max_index_values = new int[0];
+        // Get number of items that tie for the top value.
+        // to be used for building new array.
+        int dupe_count = 0;
         for (int i = 0; i < asterisk_count.length; i++) {
-            max_index_values[i] = asterisk_count[i];
+            if (asterisk_count[i] == biggest) {
+                dupe_count++;
+            }
         }
 
+        // Create array `tied_names` based on `dupe_count` size, to hold the top items.
+        // Then, add the top winning names to the `tied_names` array.
+        if (dupe_count > 1) {
+            String[] tied_names = new String[dupe_count];
+            int tied_names_index = 0;
+
+            // Print initial text:
+            System.out.print("Tie between ");
+
+            // Loop: If the `asterisk_count[i]` is equal to `biggest`, add name to `tied_names`
+            // Manually increment a counter every time something is added to `tied_names`, so
+            // you know what node of `tied_names` you're adding to.
+            if (dupe_count > 1) {
+                for (int i = 0; i < asterisk_count.length; i++) {
+                    if (asterisk_count[i] == biggest) {
+                        tied_names[tied_names_index] = names[i];
+                        System.out.print(names[i]);
+                        if (tied_names_index < dupe_count - 1) {
+                            System.out.print(" and ");
+                        }
+                        tied_names_index++;
+                    }
+                }
+                System.out.println();
+                System.out.println("Student selected: foo, foo (add code for multiple winners)");
+            } else {
+                System.out.println("Student selected: (add code for one winner");
+            }
+        }
     }
 }
